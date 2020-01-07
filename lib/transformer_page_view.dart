@@ -504,8 +504,8 @@ class _TransformerPageViewState extends State<TransformerPageView> {
   void didUpdateWidget(TransformerPageView oldWidget) {
     _transformer = widget.transformer;
     int index = widget.index ?? 0;
-    bool created = false;
     if (_pageController != widget.pageController) {
+      bool created = false;
       if (widget.pageController != null) {
         _pageController = widget.pageController;
       } else {
@@ -518,16 +518,16 @@ class _TransformerPageViewState extends State<TransformerPageView> {
                 ? false
                 : widget.transformer.reverse);
       }
-    }
-
-    if (_pageController.getRenderIndexFromRealIndex(_activeIndex) != index) {
-      _fromIndex = _activeIndex = _pageController.initialPage;
-      if (!created && _pageController.hasClients) {
-        int initPage = _pageController.getRealIndexFromRenderIndex(index);
-        _pageController.animateToPage(initPage,
-            duration: widget.duration, curve: widget.curve);
+      if (_pageController.getRenderIndexFromRealIndex(_activeIndex) != index) {
+        _fromIndex = _activeIndex = _pageController.initialPage;
+        if (!created && _pageController.hasClients) {
+          int initPage = _pageController.getRealIndexFromRenderIndex(index);
+          _pageController.animateToPage(initPage,
+              duration: widget.duration, curve: widget.curve);
+        }
       }
     }
+
     if (_transformer != null)
       WidgetsBinding.instance.addPostFrameCallback(_onGetSize);
 
